@@ -1,0 +1,74 @@
+<head>
+<script language="javascript">
+    function writeCheck() {
+        var form = document.writeform;
+
+        if (form.croom_reason.value=="first")
+        {
+            alert("대실사유를 선택해주세요");
+            form.sleepout_reason.focus();
+            return;
+        }
+        else
+            alert("신청이 완료되었습니다.")
+        form.submit();
+    }
+</script>
+</head>
+
+<div class="container">
+	<div class="row">
+      <div class="col col-sm-12">
+        
+        <div class="panel">
+        <div class="panel-body">
+          당일신청만 가능합니다<span class="glyphicon glyphicon-heart-empty"></span>
+        </div>
+        </div>
+        
+      </div>
+  	</div>
+  </div>
+
+<!-- Begin Body -->
+<div class="container">
+	<div class="row">
+  		<div class="panel">
+<center>
+<br><br><br><br><br>
+  <form action = "/domitory/croom" method = "POST"  name=writeform> 
+<input type="hidden" name="domitory_id" value="<%= current_domitory.id %>">
+  <input type = hidden value = "<%= current_domitory.student_number %>" name = "student_number">
+  <input type = hidden value = "<%= current_domitory.name %>" name = "student_name">
+  <input type = hidden value = "<%= current_domitory.room_number %>" name = "room_number">
+<table class="type09">
+  <thead>
+  <tr align = center><th colspan = 2 scope="cols"><center><font size = "5">커뮤니티룸 신청</font></center></th></tr>
+  </thead>
+  <tbody>
+  <tr><th scope="row"><center>학&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;번</center></th><td><%= current_domitory.student_number %></td></tr>
+  <tr><th scope="row"><center>이&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;름</center></th><td><%= current_domitory.name %></td></tr>
+  <tr><th scope="row"><center>호&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;실</center></th><td><%= current_domitory.room_number %></td></tr>
+<tr>
+  <th scope="row"><center>대실날짜</center></th><td colspan = 2><input type = date name = "apply_date" value = <%= Time.now.strftime("%F") %> min = <%= Time.now.strftime("%F") %> max = <%= Time.now.strftime("%F") %>></td>
+  </tr>
+  <tr>
+  <th scope="row"><center>대실사유</center></th><td colspan = 2><select name="croom_reason">
+                <option value="first" selected>선택하세요</option>
+                <option value="hw">야작(과제)</option>
+                <option value="exam">시험</option>
+                <option value="etc">기타</option>
+            </select></td>
+</tr>
+</tbody>
+</table>
+<br>
+<input class="btn btn-default" type = submit value = "신청" OnClick="javascript:writeCheck();">
+<input class="btn btn-default" type = reset value = "취소">
+</form>
+</center>
+<br><br><br><br><br><br><br><br><br>
+<hr>
+             	</div>
+      	</div> 
+  	</div>

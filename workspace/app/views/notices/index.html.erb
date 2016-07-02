@@ -1,0 +1,70 @@
+  <div class="container">
+	<div class="row">
+      <div class="col col-sm-12">
+        
+        <div class="panel">
+        <div class="panel-body">
+          모든 사생들은 필독해주세요 <span class="glyphicon glyphicon-heart-empty"></span>
+        </div>
+        </div>
+        
+      </div>
+  	</div>
+  </div>
+
+
+<!-- Begin Body -->
+<div class="container">
+	<div class="row">
+  		
+
+              <div class="panel">
+              
+
+  <table class="type10">
+
+  <thead>
+    <tr align = "center">
+      <th align = "center"><center>글번호</center></th>
+      <th align = "center"><center>제목</center></th>
+      <th><center>작성일</center></th>
+      <th><center>조회수</center></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @notices.each do |notice| %>
+      <tr align = "center">
+        <td><%=notice.id %></td>
+        <td><%= link_to notice.notice_title , notice %></td>
+        <td><%= notice.created_at.strftime("%H:%M %Y/%m/%d") %></td>
+        <td><%= notice.notice_hits %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+<center>
+<% @totalPageList.each do |page| %>
+<a href="/notices?current_page=<%=page%>">
+  [
+<% if page == @current_page.to_i %>
+<b><% end %>
+<%= page %>
+<% if page == @current_page.to_i %>
+</b>
+<% end %>
+  ]
+</a>
+<% end %>
+</center>
+<br>
+<% if current_domitory.email == "admin@dongduk.ac.kr" %>
+<div style="text-align:right">
+<a class="btn btn-default" href="<%= new_notice_path %>" role="button">글쓰기</a>
+</div>
+<% end %>
+<hr>
+             	</div>
+      	</div> 
+  	</div>

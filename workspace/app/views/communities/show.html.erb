@@ -1,0 +1,81 @@
+
+<!-- Begin Body -->
+<div class="container">
+	<div class="row">
+  		<div class="panel">
+<center>              
+<br><Br>
+<table class="type09" width=80%>
+  <thead>
+  <tr align = center><th colspan = 2 scope="cols"><center><font size = "5">커뮤니티</font></center></th></tr>
+  </thead>
+  <tbody>
+  <tr>
+  <th scope="row"><center>분류</center></th><td><%= @community.com_category %></td>
+  </tr>
+
+
+  <tr>
+    <th scope="row"><center>제목</center></th>
+  <td><%= @community.com_title %></td>
+</tr>
+  
+  <tr>
+    <th scope="row"><center>글번호</center></th>
+  <td><%= @community.com_writer %></td>
+</tr>
+
+ <tr>
+   <th scope="row"><center>조회 수</center></th>
+<td><%= @community.com_hits %></td>
+ </tr>
+
+  <tr><th scope="row"><center>내용</center></Th>
+  <td><%= h(@community.com_content).gsub(/\n/,"<br>").html_safe%></td>
+</tr>
+
+<tr>
+<th scope="row"><center>댓글</center></th>
+  <td>
+    <% @community.replies.each do |r| %>
+   ▶ <%= r.r_content %><br>
+    <% if r.r_studentID == current_domitory.student_number%>
+        <form action="/communities/delete_reply/<%= r.id %>" method="post">
+           <input type="hidden" name="community_id" value="<%= r.community_id %>"/>
+           <button type="submit" style="border: none; background: transparent;">삭제</button>
+        </form>
+    <%else%> <%end%>
+  <%end%>
+  </td>
+</tr>
+</tbody>
+</table>
+
+<br><br>
+
+<form action="/communities/write_reply" method="POST">
+<table class="type09" width=80%>
+  <thead>
+  <tr align = center><th colspan = 2 scope="cols"><center><font size = "5"></font></center></th></tr>
+  </thead>
+  <tr>
+    <tr><th scope="row"><center>댓글 쓰기</center></th>
+    <td>
+      <input type = "hidden" name="community_id" value="<%=@community.id%>">
+      <textarea name="my_r_content" rows="3" cols="15"></textarea> <input type = "submit" class="btn btn-default" value="확인">
+    </td>
+  </tr>
+</table>
+    </form>
+    <br>
+    <% if @community.com_studentID == current_domitory.student_number%>
+            <%= link_to '수정', edit_community_path(@community) , :class => "btn btn-default" %>
+            <%= link_to '삭제', @community, method: :delete, data: { confirm: '삭제하시겠습니까?' } , :class => "btn btn-default" %>
+<%else%> <%end%>
+<%= link_to '목록', communities_path , :class => "btn btn-default"%>
+<br>
+</center><br><br>
+    </div>
+      </div> 
+  	</div>
+  	

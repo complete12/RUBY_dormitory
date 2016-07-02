@@ -1,0 +1,81 @@
+<!-- Begin Body -->
+<div class="container">
+	<div class="row">
+      <div class="panel">
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= devise_error_messages! %>
+<table class="type09" align=center>
+    <thead>
+        <tr align = center><th colspan = 7 scope="cols"><center><font size = "5">회원 정보 수정</font></center></th></tr>
+    </thead>
+    <tr>
+        <th scope="row"><center><%= f.label :"이메일" %></center></th>
+        <td><%= f.email_field :email, :readonly => true%></td>
+    </tr>
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+    <% end %>
+  <tr>
+      <th scope="row"><center><%= f.label :"변경할 비밀번호" %></center></th>
+      <td><%= f.password_field :password, autocomplete: "off" %></td>
+  </tr>
+  <tr>
+      <th scope="row"><center><%= f.label :"비밀번호 확인" %></center></th>
+      <td><%= f.password_field :password_confirmation, autocomplete: "off" %></td>
+  </tr>
+  <tr>
+      <th scope="row"><center><%= f.label :"현재 비밀번호" %></center></th>
+      <td><%= f.password_field :current_password, autocomplete: "off", :required => true %></td>
+  </tr>
+  <tr>
+      <th scope="row"><center><%= f.label :"이름" %></center></th>
+      <td><%= f.text_field :name, autofocus: true %></td>
+  </tr>
+  <tr>
+      <th scope="row"><center><%= f.label :"학번" %></center></th>
+      <td><%= f.text_field :student_number %></td>
+  </tr>
+  <tr><th scope="row"><center><%= f.label :"전공" %></center></th>
+        <td><%= select_tag 'domitory[major]', options_for_select([['선택해주세요', ''],
+        ['국어국문학과', '국어국문학과'], ['문예창작과', '문예창작과'], ['국사학과', '국사학과'],
+        ['영어과', '영어과'], ['일본어과', '일본어과'], ['프랑스어과', '프랑스어과'], ['독일어과', '독일어과'],
+        ['중어중국학과','중어중국학과'], ['경제학과','경제학과'], ['국제경영학과', '국제경영학과'], ['문헌정보학과','문헌정보학과'],
+        ['사회복지학과', '사회복지학과'], ['아동학과', '아동학과'], ['세무회계학과', '세무회계학과'], ['식품영양학과', '식품영양학과'],
+        ['응용화학과', '응용화학과'], ['보건관리학과', '보건관리학과'], ['체육학과', '체육학과'], ['컴퓨터학과', '컴퓨터학과'],
+        ['정보통계학과', '정보통계학과'], ['약학과', '약학과'], ['회화과', '회화과'], ['디지털공예과', '디지털공예과'],
+        ['큐레이터학과', '큐레이터학과'], ['피아노과', '피아노과'], ['관현악과', '관현악과'], ['성악과', '성악과'],
+        ['패션디자인학과', '패션디자인학과'], ['패션디자인학과2', '패션디자인학과2'], ['시각&실내디자인학과', '시각&실내디자인학과'], ['미디어디자인학과', '미디어디자인학과'],
+        ['방송연예과2', '방송연예과2'], ['실용음악과', '실용음악과'], ['무용과', '무용과'], ['모델과', '모델과'], ['교직원', '교직원']], 0), :required => true%></td>
+    </tr><th scope="row"><center><%= f.label :"본인 전화번호" %></center></th>
+        <td><%= f.text_field :user_phone_number , :required => true, :placeholder => "000-0000-0000"%></td>
+    </tr>
+    <tr>  
+        <th scope="row"><center><%= f.label :"보호자 전화번호" %></center></th>
+        <td><%= f.text_field :parent_phone_number, :required => true, :placeholder => "000-0000-0000" %></td>
+    </tr>
+  <tr>  
+      <th scope="row"><center><%= f.label :"호실" %></center></td>
+      <td><%= f.text_field :room_number %></td>
+  </tr>
+  <tr>
+</table> <br>
+    <div class="actions" align = "center">
+      <%= f.submit "수정", :class => "btn btn-default"%>
+    </div>
+<% end %>
+<br><br>
+<hr>
+  <table class="type09"  align=center>
+  <thead>
+    <tr align = center><th colspan = 5 scope="cols"><center><font size = "5">회원탈퇴</font></center></th></tr>
+    </thead>
+    </table>
+<div align = "center"><br>
+  <p>탈퇴하시겠습니까? <%= button_to "회원 탈퇴", registration_path(resource_name), data: { confirm: "정말 탈퇴하시겠습니까?" }, method: :delete, :class => "btn btn-default" %></p>
+</div>
+<div align = "right">
+</div>
+</div>
+</div>
+</div>

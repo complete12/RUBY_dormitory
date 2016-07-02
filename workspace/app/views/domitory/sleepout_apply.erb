@@ -1,0 +1,133 @@
+<head>
+<script language="javascript">
+    function writeCheck() {
+        var form = document.writeform;
+
+        if (form.sleepout_reason.value=="first")
+        {
+            alert("외박사유를 선택해주세요");
+            form.sleepout_reason.focus();
+            return;
+        }
+        // if (!form.subject.value) {
+        //     alert("제목을 적어주세요");
+        //     form.subject.focus();
+        //     return;
+        // }
+
+        else
+            alert("외박신청이 완료되었습니다.")
+        form.submit();
+    }
+    function cancelCheck() {
+        alert("외박신청이 취소되었습니다.")
+    }
+</script>
+</head>
+
+  <div class="container">
+	<div class="row">
+      <div class="col col-sm-12">
+        
+        <div class="panel">
+        <div class="panel-body">
+        날짜 확인 꼭 해주세요<span class="glyphicon glyphicon-heart-empty"></span>
+        </div>
+        </div>
+        
+      </div>
+  	</div>
+  </div>
+
+<!-- Begin Body -->
+<div class="container">
+    <div class="panel">
+       <br><br><br>
+<div class="table-responsive">
+    <form name=writeform method=post action = "/domitory/sleepout">
+        <center>
+        <table class="type09">
+            <thead>
+            <tr>
+                 <input type= hidden name="domitory_id" value="<%= current_domitory.id %>"/>
+                 <input type = hidden name = "student_number" value = "<%= current_domitory.student_number %>">
+                 <th colspan=2 scope="cols"><center><font size = "5">외박신청</font></center></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row"><center>외 박 구 분</center></th>
+                <td>
+                    <select name="sleepout_section">
+                        <option value="general">일반</option>
+                        <option value="special">특별</option>
+                    </select>
+                </td>
+            <tr>
+                <th scope="row"><center>외 박 사 유</center></th>
+                <td>
+                    <select name="sleepout_reason">
+                    <option value="first" selected>선택하세요</option>
+                    <option value="hw">야작(과제)</option>
+                    <option value="friend">친구집 방문</option>
+                    <option value="campus_room">교내 열람실</option>
+                    <option value="domitory_room">목화관내 열람실</option>
+                    <option value="visit">본가 및 친척집 방문</option>
+                    <option value="long">장기외박신청</option>
+                    <option value="gevent">학교수업 및 행사</option>
+                    <option value="part_time">아르바이트</option>
+                    <option value="etc">기타</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><center>호&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;실</center></th>
+                <td><%= current_domitory.room_number%></td>  <!--개인의 정보에 따라 미리 호실입력받아옴(입력받지않음)-->
+                </tr>
+            </tr>
+            <tr>
+                <th scope="row"><center>본 인 번 호</center></th>
+                <td><%= current_domitory.user_phone_number%></td> <!--개인의 정보에 따라 미리 번호입력받아옴(입력받지않음)-->
+            </tr>
+            <tr>
+                <th scope="row"><center>보호자번호</center></th>
+                <td><%= current_domitory.parent_phone_number%></td> <!--개인의 정보에 따라 미리 번호입력받아옴(입력받지않음)-->
+            </tr>
+            <tr>
+                <th scope="row"><center>시 작 일 자</center></th>
+                <td><input type = date name="apply_start_date"  value = <%= Time.now.strftime("%Y-%m-%d") %>  min = <%= Time.now.strftime("%F") %>></td>
+            </tr>
+            <tr>
+                <th scope="row"><center>종 료 일 자</center></th>
+                <% if Time.now.strftime("%m") == 1 || Time.now.strftime("%m") == 3 || Time.now.strftime("%m") == 5 || Time.now.strftime("%m") == 7 || Time.now.strftime("%m") == 8%>
+                <td><input type = date name="apply_end_date" min = <%= Time.now.strftime("%F") %>></td>
+                <%else%>
+                <td><input type = date name="apply_end_date" min = <%= Time.now.strftime("%F") %>></td>
+                <%end%>
+            </tr>
+            <tr>
+                <th scope="row"><center>남 은 횟 수</center></th>
+                <td><%= current_domitory.sleepout_rest%></td>
+            </tr>
+            </tbody>
+        </table>
+        </center>
+    </div>
+<br>
+<input type = hidden value = "1" name = sleepout_apply>
+<center>
+    <% if current_domitory.sleepout_rest <= 0 %>
+    <input type = button class="btn btn-default"  value = "외박신청" name = apply disabled>
+    <%else%>
+    <input type = submit  class="btn btn-default"  value = "외박신청" name = apply OnClick="javascript:writeCheck();">
+    <%end%>
+<a href="/domitory/index"><input type = reset  class="btn btn-default"  value = "외박취소" name = cancel OnClick="javascript:cancelCheck();" ></a>
+</center>
+<br>
+<br>
+<br>
+</form>
+<hr>
+</div>
+</div>
+

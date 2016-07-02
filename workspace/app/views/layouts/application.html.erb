@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>동덕여대 생활관-목화관</title>
+  <!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+<!-- 부가적인 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="../bootstrap.min.css">
+<link rel="stylesheet" href="../styles.css">
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<% if domitory_signed_in? %>
+<nav class="navbar navbar-static">
+  
+  <div class="row">
+      <div class="col col-sm-6"style="margin-left:50px;">
+        <center><div class="col">
+         
+        </div></center>
+      </div>
+    </div>
+    <div class="container" style="margin-bottom=0px;">
+      <a class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="glyphicon glyphicon-chevron-down"></span>
+      </a><br>
+      <div class="nav-collapse collase">
+        <ul class="nav navbar-nav"> 
+          <li><a href="/domitory/index"><center><img src="../main_logo.png"/><Br>WELCOME TO COTTON-HOUSE</center></a></li>
+        </ul>
+        <ul class="nav navbar-right navbar-nav" style="padding-top:40px;">
+          <%if current_domitory.email == "admin@dongduk.ac.kr"%>
+            <li><a href="/domitory/admin">관리자</a></li>
+          <%end%>
+          <li><a href="/notices">공지사항</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">신청하기&nbsp;<i class="glyphicon glyphicon-chevron-down"></i></a>
+            <ul class="dropdown-menu">
+              <li><a href="/domitory/sleepout_apply">외박 신청</a></li>
+              <li><a href="/domitory/croom_apply">커뮤니티 룸 신청</a></li>
+             </ul>
+          </li>  
+          <li><a href="/proposals">건의사항</a></li>
+          <li><a href="/communities">커뮤니티</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> <i class="glyphicon glyphicon-chevron-down"></i></a>
+            <ul class="dropdown-menu">
+              <li> <% if domitory_signed_in? %> 
+                    <a href="/domitories/sign_out">로그아웃하기</a><br>
+                   <% else %>
+                    <a href="/domitories/sign_in">로그인하기</a><br>
+                   <%end%>
+              </li>
+              <li><a href="/domitory/myinfo">내 정보</a></li>
+              
+             </ul>
+          </li>  
+        </ul>
+      </div>		
+    </div>
+</nav><!-- /.navbar -->
+<% end %>
+<%= yield %>
+<% if domitory_signed_in? %>
+<footer class="footer">
+  <center>
+    <br>
+      <font color = "white" size = "3">Copyright © Domitory Website 2015</font>
+      <br>
+      <a href="#">Back to top</a>
+  </center>
+    </footer>
+<%end%>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="../bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<div class="container">
+	<div class="row">
+      <div class="col col-sm-12">
+        
+        <div class="panel">
+        <div class="panel-body">
+          문의해주세요<span class="glyphicon glyphicon-heart-empty"></span>
+        </div>
+        </div>
+        
+      </div>
+  	</div>
+  </div>
+<!-- Begin Body -->
+<div class="container">
+	<div class="row">
+  		
+
+              <div class="panel">
+              
+
+  <table class="type10">
+
+  <thead>
+    <tr align = "center">
+       <th align = "center"><center>글번호</th>
+      <th align = "center"><center>분&nbsp;류</td>
+      <th><center>제&nbsp;목</th>
+      <th><center>답변</th>
+      <th><center>작성일</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @proposals.each do |proposal| %>
+      <tr align = "center">
+        <td><%= proposal.id %></td>
+        <td><%= proposal.p_category %></td>
+        <td ><%= link_to proposal.p_title, proposal %></td>
+        <td><%= proposal.p_answer %></td>
+        <td><%= proposal.created_at.strftime("%H:%M %Y/%m/%d") %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<center>
+<br>
+  <% @totalPageList.each do |page| %>
+<a href="/proposals?current_page=<%=page%>">
+  [
+<% if page == @current_page.to_i %>
+<b><% end %>
+<%= page %>
+<% if page == @current_page.to_i %>
+</b>
+<% end %>
+  ]
+</a>
+<% end %>
+</center>
+<br>
+<div style="text-align:right">
+<a class="btn btn-default" href="<%= new_proposal_path %>" role="button">글쓰기</a>
+</div>
+<hr>
+              	</div>
+      	</div> 
+  	</div>

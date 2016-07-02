@@ -1,0 +1,29 @@
+<div class="container">
+	<div class="row">
+  		<div class="panel">
+<center>          
+<br><Br>
+<table class="type09" width=80%>
+  <thead>
+  <tr align = center><th colspan = 2 scope="cols"><center><font size = "5">공지사항</font></center></th></tr>
+  </thead>
+  <tbody>
+  <tr><th scope="row"><center>제&nbsp;&nbsp;&nbsp;목</center></th><td><%= @notice.notice_title %></td></tr>
+  <tr><th scope="row"><center>글쓴이</center></th><td>관리자</td></tr>
+  <tr><th scope="row"><center>내&nbsp;&nbsp;&nbsp;용</center></th><td><%= h(@notice.notice_content).gsub(/\n/,"<br>").html_safe%></td></tr>
+  
+  </tbody>
+</table>
+</center>
+<br>
+<center>
+<% if current_domitory.email == "admin@dongduk.ac.kr" %>
+<%= link_to '삭제', notice, method: :delete, data: { confirm: '삭제하시겠습니까?' } , :class => "btn btn-default"%>
+<%= link_to '수정', edit_notice_path(@notice), :class => "btn btn-default" %>
+<% end %>
+<%= link_to '목록', notices_path, :class => "btn btn-default" %>
+</center><br><br>
+             	</div>
+    </div> 
+</div>
+

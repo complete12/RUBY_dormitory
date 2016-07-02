@@ -1,0 +1,67 @@
+<div class="container">
+	<div class="row">
+      <div class="col col-sm-12">
+        
+        <div class="panel">
+        <div class="panel-body">
+          서로 상처받지 않도록 예의를 갖춰 소통합시다<span class="glyphicon glyphicon-heart-empty"></span>
+        </div>
+        </div>
+        
+      </div>
+  	</div>
+  </div>
+
+<!-- Begin Body -->
+<div class="container">
+              <div class="panel">
+
+      
+<table class="type10">
+  <thead>
+    <tr align = "center">
+      <th align = "center"><center>글번호</center></th>
+      <th align = "center"><center>분류</center></th>
+      <th align = "center"><center>제목</center></th>
+      <th align = "center"><center>작성일</center></th>
+      <th align = "center"><center>조회수</center></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @communities.each do |community| %>
+      <tr align = "center">
+        <td><%= community.com_writer %></td>
+        <td><%= community.com_category %></td>
+        <td><%= link_to community.com_title, community %></td>
+        <td><%= community.created_at.strftime("%H:%M %Y/%m/%d") %></td>
+        <td><%= community.com_hits %> </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<center>
+<% @totalPageList.each do |page| %>
+<a href="/communities?current_page=<%=page%>">
+  [
+<% if page == @current_page.to_i %>
+<b><% end %>
+<%= page %>
+<% if page == @current_page.to_i %>
+</b>
+<% end %>
+  ]
+</a>
+<% end %>
+</center>
+<br>
+<div style="text-align:right">
+<a class="btn btn-default" href="<%= new_community_path %>" role="button">글쓰기</a>
+</div>
+<hr>
+             	</div>
+      	</div> 
+  	</div>
+

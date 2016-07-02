@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <style type="text/css">
+  body {
+    background-image: url("../background2.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;       
+    webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover; 
+  }
+ </style>
+ 
+  </head>
+ <body>
+    
+    <center>
+        <img src="../background_logo_2.png" width = "200px"/>
+
+<div class="container">
+	<div class="row">
+      <div class="panel">
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { name: "writeform" }) do |f| %>
+  <%= devise_error_messages! %>
+  <br><br>
+  <center>
+  <table class="type09">
+    <thead>
+    <tr align = center><th colspan = 2 scope="cols"><center><font size = "5">회원가입</font></center></th></tr>
+    </thead>
+   <tbody>
+    <tr><th scope="row"><center><%= f.label :"이메일" %></center></th><td><%= f.email_field :email, autofocus: true, :placeholder => "학번@dongduk.ac.kr"  %></td></tr>
+    <tr><th scope="row"><center><%= f.label :"비밀번호" %></center></th>
+    <% if @minimum_password_length %>
+        
+        <% end %>
+    <td><%= f.password_field :password, autocomplete: "off" %><br><em>(<%= @minimum_password_length %> characters minimum)</em></td></tr>
+
+   <tr><th scope="row"><center><%= f.label :"비밀번호 확인" %></center></th><td><%= f.password_field :password_confirmation, autocomplete: "off" %></td></tr>
+ 
+   <tr><th scope="row"><center><%= f.label :"이름" %></center></th><td><%= f.text_field :name, :required => true%></td></tr>
+   
+    <tr><th scope="row"><center><%= f.label :"학번" %></center></th><td><%= f.text_field :student_number, :required => true %></td></tr>
+    <tr><th scope="row"><center><%= f.label :"전공" %></center></th>
+        <td><%= select_tag 'domitory[major]', options_for_select([['선택해주세요', ''],
+        ['국어국문학과', '국어국문학과'], ['문예창작과', '문예창작과'], ['국사학과', '국사학과'],
+        ['영어과', '영어과'], ['일본어과', '일본어과'], ['프랑스어과', '프랑스어과'], ['독일어과', '독일어과'],
+        ['중어중국학과','중어중국학과'], ['경제학과','경제학과'], ['국제경영학과', '국제경영학과'], ['문헌정보학과','문헌정보학과'],
+        ['사회복지학과', '사회복지학과'], ['아동학과', '아동학과'], ['세무회계학과', '세무회계학과'], ['식품영양학과', '식품영양학과'],
+        ['응용화학과', '응용화학과'], ['보건관리학과', '보건관리학과'], ['체육학과', '체육학과'], ['컴퓨터학과', '컴퓨터학과'],
+        ['정보통계학과', '정보통계학과'], ['약학과', '약학과'], ['회화과', '회화과'], ['디지털공예과', '디지털공예과'],
+        ['큐레이터학과', '큐레이터학과'], ['피아노과', '피아노과'], ['관현악과', '관현악과'], ['성악과', '성악과'],
+        ['패션디자인학과', '패션디자인학과'], ['패션디자인학과2', '패션디자인학과2'], ['시각&실내디자인학과', '시각&실내디자인학과'], ['미디어디자인학과', '미디어디자인학과'],
+        ['방송연예과2', '방송연예과2'], ['실용음악과', '실용음악과'], ['무용과', '무용과'], ['모델과', '모델과'], ['교직원', '교직원']], 0), :required => true%></td>
+    </tr><th scope="row"><center><%= f.label :"본인 전화번호" %></center></th>
+        <td><%= f.text_field :user_phone_number , :required => true, :placeholder => "000-0000-0000"%></td>
+    </tr>
+    <tr>  
+        <th scope="row"><center><%= f.label :"보호자 전화번호" %></center></th>
+        <td><%= f.text_field :parent_phone_number, :required => true, :placeholder => "000-0000-0000" %></td>
+    </tr>
+    <tr>  
+        <th scope="row"><center><%= f.label :"호실" %></th>
+        <td><%= f.text_field :room_number, :required => true %></td>
+    </tr>
+    </tbody>
+  </table> 
+  </center>
+    <br>    
+      <div class="actions" align="center">
+        <input class="btn btn-default" type="submit" name="commit" value="가입" OnClick="javascript:writeCheck()">
+      </div>
+      
+      
+    <% end %>
+    <br><br><br>
+    </div>
+    </div>
+  </div>
+  
+</body>
+</html>

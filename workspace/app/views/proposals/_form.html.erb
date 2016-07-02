@@ -1,0 +1,59 @@
+<div class="container">
+	<div class="row">
+  		<div class="panel">
+  	<center>	  
+        <br>
+<%=form_for(@proposal) do |f| %>
+  <% if @proposal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@proposal.errors.count, "error") %> prohibited this notice from being saved:</h2>
+
+      <ul>
+      <% @proposal.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+<table class="type09" width=80%>
+  <thead>
+    <tr>
+      <th scope="cols" colspan = 2><center><h2>건의사항</h2></center></th>
+    </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <div class="field">
+    <th scope="row" valign = "center"><center><%= f.label :분류 %></center></td>
+    <td><%= f.select :p_category, [["질문"], ["수리요청"]] %></td>
+  </div>
+  </tr>
+  <div class="field">
+   <th scope="row"><center><%= f.label :제목 %></center></td>
+    <td><%= f.text_field :p_title, size:70 %></td>
+  </div>
+  </tr>
+  <tr>
+  <div class="field">
+    <th scope="row" valign = "center"><center><%= f.label :내용 %></center></td>
+    <td><%= f.text_area :p_content, cols:80, rows:25 %></td>
+  </div>
+  </tr>
+  <div class="field">
+    <% f.label :숨김 %>
+    <%= f.hidden_field :p_studentID, :value => current_domitory.student_number %>
+  </div>
+</table>
+<br>
+
+<center>
+  <div class="actions">
+    <%= f.submit "확인", class: 'btn btn-default'%>
+  </div>
+  </center>
+<% end %>
+</center>
+      </div>
+  </div> 
+</div>

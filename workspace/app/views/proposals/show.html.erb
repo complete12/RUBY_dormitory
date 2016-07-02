@@ -1,0 +1,74 @@
+
+<!-- Begin Body -->
+<div class="container">
+	<div class="row">
+  		<div class="panel">
+<center>              
+<br><Br>
+<table class="type09" width=80%>
+  <thead>
+  <tr align = center><th colspan = 2 scope="cols"><center><font size = "5">건의사항</font></center></th></tr>
+  </thead>
+  <tbody>
+  <tr>
+  <th scope ="row"><center>분류</center></th><td><%= @proposal.p_category %></td>
+  
+  </tr>
+
+<tr>
+  <th scope ="row" class = "even"><center>답글유무</center></th>
+  <td class = "even"><%= @proposal.p_answer %></td>
+</tr>
+
+<Tr>
+  <th scope ="row"><center>제목</center></Th>
+  <td><%= @proposal.p_title %></td>
+</Tr>
+
+<tr>
+  <th scope ="row" class = "even"><center>내용</center></th>
+  <Td class = "even"><%= h(@proposal.p_content).gsub(/\n/,"<br>").html_safe %></Td>
+</tr>
+
+<tr>
+  <th scope ="row"><center>답글</center></th>
+  <td>
+    <% @proposal.reply_proposals.each do |r| %>
+   ▶ <%= r.answer_content %> <br>
+   <% if r.answer_studentID == current_domitory.student_number%>
+        <form action="/proposals/delete_answer/<%= r.id %>" method="post">
+           <input type="hidden" name="proposal_id" value="<%= r.proposal_id %>"/>
+           <button type="submit" style="border: none; background: transparent;">삭제</button>
+        </form>
+    <%else%> <%end%>
+  <%end%>
+  </td>
+</tr>
+</tbody>
+</table>
+
+<br><br>
+
+<form action="/proposals/write_answer" method="POST">
+  <table class="type09" width=80%>
+    <thead>
+  <tr align = center><th colspan = 2 scope="cols"><center><font size = "5"></font></center></th></tr>
+  </thead>
+    <tr>
+      <th scope ="row"><center>답글 쓰기</center></Th>
+      <td ><input type = "hidden" name="proposal_id" value="<%=@proposal.id%>">
+    <textarea name="my_answer_content" rows="3" cols="15"></textarea> <input type = "submit" class="btn btn-default" value="확인"></td>
+    </tr>
+  </table>
+ </form>
+<br>
+ <% if @proposal.p_studentID == current_domitory.student_number%>
+            <%= link_to '수정', edit_proposal_path(@proposal) , :class => "btn btn-default" %>
+            <%= link_to '삭제', @proposal, method: :delete, data: { confirm: '삭제하시겠습니까?' } , :class => "btn btn-default" %>
+          <%else%> <%end%>
+<%= link_to '목록', proposals_path , :class => "btn btn-default" %>
+    </center> 
+    <br><br>
+    </div>
+  </div> 
+</div>

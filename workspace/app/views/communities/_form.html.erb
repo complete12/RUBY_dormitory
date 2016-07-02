@@ -1,0 +1,66 @@
+<div class="container">
+	<div class="row">
+  		<div class="panel">
+  		  <center>
+        <br>
+<%= form_for (@community) do |f| %>
+  <% if @community.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@community.errors.count, "error") %> <Br>게시물을 저장할 수 없습니다.</h2>
+
+      <ul>
+      <% @community.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<table class="type09" width=80%>
+  <thead>
+    <tr>
+      <th scope="cols" colspan = 2><center><h2>커뮤니티</h2></center></th>
+    </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <div class="field">
+    <th scope="row" valign = "center"><center><%= f.label :분류 %></center></th>
+    <td><%= f.select :com_category, ['잡담', '벼룩시장', '요청']%></td>
+  </div>
+  </tr>
+  <Tr>
+    <div class="field">
+    <th scope="row" valign = "center"><center><%= f.label :제목 %></center></th>
+    <td><%= f.text_field :com_title, size:70 %></td>
+    </div>
+  </Tr>
+  
+  <tr>
+    <div class="field">
+    <th scope="row" valign = "center"><center><%= f.label :내용 %></center></th>
+    <td><%= f.text_area :com_content, cols:80, rows:25 %></td>
+  </div>
+  </tr>
+  
+  <div class="field">
+    <% f.label :글번호 %>
+    <%= f.hidden_field :com_writer%>
+    <% f.label :조회수%>
+    <%= f.hidden_field :com_hits %>
+    <%= f.hidden_field :com_studentID, value: current_domitory.student_number %>
+  </div>
+  </tbody>
+</table>
+
+<br>
+
+<center>
+  <div class="actions">
+    <%= f.submit "확인", class: 'btn btn-default'%>
+  </div>
+</center>
+<% end %>
+</center>
+      </div>
+  </div> 
+</div>
